@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Product Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/template/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="/template/vendors/base/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/template/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="/template/images/favicon.png" />
+</head>
+<body>
+<div class="container-scroller">
+
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo me-5" href="index.html"><img src="/template/images/logo.svg" class="me-2" alt="logo"/></a>
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/template/images/logo-mini.svg" alt="logo"/></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <span class="ti-view-list"></span>
+            </button>
+            <ul class="navbar-nav mr-lg-2">
+                <li class="nav-item nav-search d-none d-lg-block">
+                    <div class="input-group">
+                        <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="ti-search"></i>
+                </span>
+                        </div>
+                        <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+                    </div>
+                </li>
+            </ul>
+
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                <span class="ti-view-list"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="ti-shield menu-icon"></i>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <i class="ti-palette menu-icon"></i>
+                        <span class="menu-title">Products</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="/template/list.html">List Products</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="/template/form.html">Create Products</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body" id="product-detail">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard </a> templates</span>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script src="/template/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<script src="/template/vendors/chart.js/Chart.min.js"></script>
+<script src="/template/js/jquery.cookie.js" type="text/javascript"></script>
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script src="/template/js/off-canvas.js"></script>
+<script src="/template/js/hoverable-collapse.js"></script>
+<script src="/template/js/template.js"></script>
+<script src="/template/js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="js/dashboard.js"></script>
+<!-- End custom js for this page-->
+<script>
+
+    document.addEventListener('DOMContentLoaded', function (){
+        loadData();
+    })
+    function getParametterUrl(parameterName){
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        return url.searchParams.get(parameterName);
+    }
+    function loadData(){
+        var id = getParametterUrl('id');
+        var xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.onreadystatechange = function(){
+            if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+
+                var contentText = '';
+                var element = JSON.parse(xmlHttpRequest.responseText);
+
+                contentText += `<h3 class="card-title">Product Detail</h3>
+                                <p class="text-success fs-6">Product Number: ${element.productId}</p>
+                                <p class="text-success fs-6">Product Name: ${element.productId}</p>
+                                <p class="text-success fs-6">Slug: ${element.slug}</p>
+                                <p class="text-success fs-6">Description: ${element.description}</p>
+                                <p class="text-success fs-6">Details: ${element.detail}</p>
+                                <p class="text-success fs-6">Price: ${element.price}</p>
+                                <p class="text-success fs-6">Manufacturer: ${element.manufacturer}</p>
+                                <img src="${element.image}" alt="" class="img-fluid" style="width: 250px;height: auto;display: block"/>
+                                 <a href="/template/list.html" class="btn btn-primary mt-4">Back to list</a>
+`
+
+                var listProduct = document.getElementById('product-detail');
+                if(listProduct !== undefined){
+                    listProduct.innerHTML = contentText;
+                }
+            }
+        }
+        xmlHttpRequest.open('GET',`https://product-back-end-202.herokuapp.com/api/v1/products/${id}`, false);
+        xmlHttpRequest.send();
+    }
+</script>
+</body>
+
+</html>
+
